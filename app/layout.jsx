@@ -1,12 +1,11 @@
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import Nav from './ui/nav/nav';
-import Hero from './ui/hero/hero';
 
 const font = Poppins({ weight: ['400'], subsets: ['latin'] });
 
 export const metadata = {
-  title: 'CarRent',
+  title: 'Car Rent',
 };
 
 export default function RootLayout({ children }) {
@@ -17,7 +16,6 @@ export default function RootLayout({ children }) {
       </head>
       <body className={font.className}>
         <Nav />
-        <Hero />
         {children}
       </body>
     </html>
