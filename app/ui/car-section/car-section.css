@@ -1,0 +1,51 @@
+.car-section {
+  padding: 20px;
+  margin: 20px 40px;
+}
+
+.cars {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 50px;
+  flex-wrap: wrap;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.cars-element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cars-element a {
+  text-decoration: none;
+  border: 2px solid #10264b;
+  border-radius: 5px;
+  color: #10264b;
+  margin: 30px 0;
+  padding: 10px 35px;
+  transition: 0.3s;
+}
+
+.cars-element a:hover {
+  background-color: #10264b;
+  color: #fff;
+}
+
+.car-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 10px;
+  color: #212529;
+  margin-bottom: 40px;
+}
+
+.car-text h3 {
+  font-size: 32px;
+}
