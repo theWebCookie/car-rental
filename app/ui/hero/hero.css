@@ -1,8 +1,8 @@
 .hero {
   color: #fff;
-  max-width: 1440px;
+  max-width: 1920px;
   margin: 0px auto;
-  padding: 0px 10px;
+  padding: 0 30px;
 }
 
 .hero i {
@@ -62,6 +62,7 @@
   font-size: 17px;
   color: #10264b;
   padding: 20px 30px;
+  margin: 0 20px;
 }
 
 .hero-text h1 {
@@ -94,6 +95,10 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .hero {
+    padding: 0 10px;
+  }
+
   .hero-search ul {
     display: none;
   }
