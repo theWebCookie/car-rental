@@ -1,7 +1,7 @@
-import Hero from './ui/hero/hero';
+import Hero from './ui/main/hero/hero';
 import styles from './page.module.css';
-import MainSection from './ui/main-section/main-section';
-import CarSection from './ui/car-section/car-section';
+import MainSection from './ui/main/main-section/main-section';
+import CarSection from './ui/main/car-section/car-section';
 
 export default function Home() {
   return (
