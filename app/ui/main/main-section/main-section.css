@@ -52,7 +52,7 @@
 .main-text {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 18px;
 }
 
 .main-text span:nth-child(1) {

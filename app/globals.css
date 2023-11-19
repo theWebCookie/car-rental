@@ -2,7 +2,6 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
 html,
 body,
 div,
@@ -136,4 +135,7 @@ body {
 
 footer {
   flex-grow: 1;
+}
+* {
+  box-sizing: border-box;
 }

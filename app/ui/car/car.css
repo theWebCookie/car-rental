@@ -1,0 +1,45 @@
+.car {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 2px solid #d7d7d7;
+  border-radius: 5px;
+  padding: 25px 0;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.car-info {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.car-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.car-info-wrapper div span,
+.car-info-wrapper button {
+  margin-left: 10px;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.info div {
+  margin: 10px;
+}
+
+@media only screen and (max-width: 450px) {
+  .car .car-image img {
+    width: 250px;
+    height: 82px;
+  }
+}
