@@ -1,7 +1,9 @@
+'use client';
 import Image from 'next/image';
 import './car.css';
+import Link from 'next/link';
 
-export default function Car({ src, alt, title, fuel, transmission, fuelUsage, luggage, doors, seats }) {
+export default function Car({ src, alt, title, fuel, transmission, fuelUsage, luggage, doors, seats, id }) {
   return (
     <div className='car'>
       <div className='car-image'>
@@ -32,7 +34,7 @@ export default function Car({ src, alt, title, fuel, transmission, fuelUsage, lu
               <Image src='/car/seats.svg' width={16} height={16} alt='seats' /> {seats}
             </div>
           </div>
-          <button>WIĘCEJ</button>
+          <Link href={`/fleet/${id}`}>WIĘCEJ</Link>
         </div>
       </div>
     </div>
