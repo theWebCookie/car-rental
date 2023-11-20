@@ -24,8 +24,26 @@
 }
 
 .car-info-wrapper div span,
-.car-info-wrapper button {
+.car-info-wrapper a {
   margin-left: 10px;
+}
+
+.car-info-wrapper a {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  background-color: #74d7fe;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+  border: 2px solid #74d7fe;
+}
+
+.car-info-wrapper a:hover {
+  background-color: #fff;
+  color: #74d7fe;
 }
 
 .info {
