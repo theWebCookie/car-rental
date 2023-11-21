@@ -1,0 +1,17 @@
+.input-wrapper {
+  padding: 10px;
+}
+
+.input-wrapper input[type='date'] {
+  width: 100%;
+  border: none;
+  border: 1px solid #cccccc;
+  border-bottom: 2px solid #74d7fe;
+  padding: 10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+::-webkit-calendar-picker-indicator {
+  color: #74d7fe;
+}

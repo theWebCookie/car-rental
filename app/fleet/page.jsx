@@ -41,8 +41,6 @@ export default function Fleet() {
     { id: 3, src: '/fleet/carVan.svg', alt: 'Van', carType: 'van' },
   ];
 
-  console.log(filteredCars);
-
   return (
     <div className='fleet'>
       <div className='fleet-wrapper'>

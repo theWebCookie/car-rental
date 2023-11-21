@@ -1,0 +1,17 @@
+.filters {
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.filter-heading {
+  color: #74d7fe;
+  font-weight: bold;
+  margin: 10px 0 10px 5px;
+}
+
+.reservation-filters .filter-type {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 10px 0;
+  display: block;
+}

@@ -29,7 +29,7 @@
 }
 
 .car-info-wrapper a {
-  width: 100%;
+  width: calc(100% - 20px);
   text-align: center;
   text-decoration: none;
   background-color: #74d7fe;
