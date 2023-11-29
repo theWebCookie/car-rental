@@ -20,7 +20,7 @@
   flex-direction: column;
 }
 
-.car-section .cars .cars-element button {
+.car-section .cars .cars-element a {
   text-decoration: none;
   border: 2px solid #10264b;
   border-radius: 5px;

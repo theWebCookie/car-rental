@@ -18,6 +18,8 @@ export default function Fleet() {
       transmission: 'Automatyczna',
       fuelUsage: '6.3',
       carType: 'automat',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est suscipit odio blanditiis quo commodi illum iure qui, fuga repellendus accusantium. Amet nesciunt in ullam possimus facere accusantium aperiam expedita quasi sint vel libero provident laudantium nisi, blanditiis obcaecati nihil at.',
     },
     {
       id: 1,
@@ -30,6 +32,8 @@ export default function Fleet() {
       transmission: 'Manualna',
       fuelUsage: '7',
       carType: 'osobowe',
+      description:
+        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis labore quasi nesciunt sequi quisquam magnam facilis accusamus, odio voluptates dolorem!',
     },
   ]);
   const { filteredCars, handleFilter } = useFilteredCars(cars);
@@ -68,6 +72,7 @@ export default function Fleet() {
               doors={car.doors}
               seats={car.seats}
               alt={car.title}
+              description={car.description}
             />
           ))}
         </div>

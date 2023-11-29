@@ -1,5 +1,5 @@
-'use client';
+import Car from '@/app/ui/car/car';
 
 export default function CarPage({ params }) {
-  return <p>Car id: {params.id}</p>;
+  return <Car extended />;
 }

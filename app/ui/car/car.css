@@ -55,6 +55,16 @@
   margin: 10px;
 }
 
+.description {
+  line-height: 1.5;
+  padding: 10px;
+}
+
+.description.hidden,
+.car-info-wrapper a.hidden {
+  display: none;
+}
+
 @media only screen and (max-width: 450px) {
   .car .car-image img {
     width: 250px;
