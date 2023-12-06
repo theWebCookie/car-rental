@@ -1,0 +1,11 @@
+.ui-input {
+  width: 100%;
+  text-decoration: none;
+  background-color: #fff;
+  color: #10264b;
+  padding: 10px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+  border: none;
+  border-bottom: 2px solid #74d7fe;
+}
