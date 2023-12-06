@@ -64,3 +64,9 @@
 .main-heading h2 {
   font-size: 32px;
 }
+
+@media only screen and (max-width: 768px) {
+  .main-section {
+    margin-top: 30px;
+  }
+}

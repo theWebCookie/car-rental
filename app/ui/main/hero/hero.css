@@ -45,6 +45,12 @@
   padding: 10px;
 }
 
+.hero-inputs div:nth-child(4) {
+  display: flex;
+  align-self: flex-end;
+  padding: 10px;
+}
+
 .hero-inputs div:nth-child(1) input {
   width: 100%;
   border: none;
@@ -101,7 +107,8 @@
   margin-top: 20px;
 }
 
-.hero-text button {
+.hero-text a {
+  display: block;
   margin-top: 10px;
 }
 
@@ -141,7 +148,7 @@
     font-size: 25px;
   }
 
-  .hero-img {
+  .hero-info {
     display: none;
   }
 }

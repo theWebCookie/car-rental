@@ -43,7 +43,7 @@
 .register-wrapper {
   color: #212529;
   width: 45%;
-  background-color: #d6d6d6;
+  background-color: rgba(214, 214, 214, 40%);
   padding: 20px 0;
   display: flex;
   justify-content: center;
@@ -85,8 +85,10 @@
   margin: 15px 0;
 }
 
-.register-form form input {
-  margin: 5px 0;
+.register-form span {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .login-form,
@@ -98,11 +100,24 @@
   display: none;
 }
 
+.register-wrapper .register-btn {
+  background-color: #10264b;
+  border: none;
+}
+
 .register-form.hidden,
 .register-btn.hidden,
-.login-btn.hidden,
-input[type='submit'].hidden {
+.ui-btn.hidden {
   display: none;
+}
+
+.register-wrapper .ui-btn {
+  margin-top: 10px;
+}
+
+.login-container div .ui-input,
+.register-wrapper .ui-input {
+  margin-top: 5px;
 }
 
 @media only screen and (max-width: 768px) {
