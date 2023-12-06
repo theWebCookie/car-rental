@@ -36,7 +36,7 @@ export default function NavLinks() {
         <Link href='/fleet' className='nav-link'>
           Flota
         </Link>
-        <Link href='/account' className='nav-link'>
+        <Link href='/login' className='nav-link'>
           <i className='fa-regular fa-user' style={{ color: '#74d7fe' }} aria-hidden='false'></i>
         </Link>
       </div>
