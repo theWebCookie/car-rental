@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
-import axios from 'axios';
 import '../ui/login/login.css';
+import Button from '../ui/button/button';
+import Input from '../ui/input/input';
 
 const initialLoginFormData = {
   email: '',
@@ -61,13 +62,11 @@ const Login = () => {
           <form name='login' onSubmit={(event) => handleFormSubmit(event, '/api/auth/login')}>
             <span>Jesteś już użytkownikiem?</span>
             <div className={isHidden ? '' : 'hidden'}>
-              <input type='email' placeholder='Adres e-mail' name='email' onChange={handleInputChange} />
-              <input type='password' placeholder='Hasło' name='password' onChange={handleInputChange} />
+              <Input type='email' placeholder='Adres e-mail' name='email' onChange={handleInputChange} />
+              <Input type='password' placeholder='Hasło' name='password' onChange={handleInputChange} />
             </div>
-            <input type='submit' value='Zaloguj się' className={isHidden ? '' : 'hidden'} />
-            <button onClick={VisibilityHandler} className={isHidden ? 'login-btn hidden' : 'login-btn'}>
-              Zaloguj się
-            </button>
+            <Button text='Zaloguj się' type='submit' className={isHidden ? '' : 'hidden'} />
+            <Button text='Zaloguj się' className={isHidden ? 'login-btn hidden' : 'login-btn'} onClick={VisibilityHandler} />
           </form>
         </div>
       </div>
@@ -87,17 +86,15 @@ const Login = () => {
           </div>
           <div className={isHidden ? 'register-form hidden' : 'register-form'}>
             <form name='register' onSubmit={(event) => handleFormSubmit(event, '/api/auth/register')}>
-              <input type='text' placeholder='Imię i naziwsko*' name='name' onChange={handleInputChange} />
-              <input type='email' placeholder='Email*' name='email' onChange={handleInputChange} />
-              <input type='password' placeholder='Hasło*' name='password' onChange={handleInputChange} />
-              <input type='password' placeholder='Powtórz hasło*' />
+              <Input type='text' placeholder='Imię i naziwsko*' name='name' onChange={handleInputChange} />
+              <Input type='email' placeholder='Email*' name='email' onChange={handleInputChange} />
+              <Input type='password' placeholder='Hasło*' name='password' onChange={handleInputChange} />
+              <Input type='password' placeholder='Powtórz hasło*' />
               <span>* - pola obowiązkowe</span>
-              <input type='submit' value='Załóż konto' />
+              <Button text='Załóż konto' type='submit' />
             </form>
           </div>
-          <button className={isHidden ? 'register-btn' : 'register-btn hidden'} onClick={VisibilityHandler}>
-            Załóż konto
-          </button>
+          <Button text='Załóż konto' className={isHidden ? 'register-btn' : 'register-btn hidden'} onClick={VisibilityHandler} />
         </div>
       </div>
     </div>

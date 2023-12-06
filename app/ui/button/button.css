@@ -1,0 +1,14 @@
+.ui-btn {
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-color: #74d7fe;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+  border: 2px solid #74d7fe;
+  height: 35px;
+}

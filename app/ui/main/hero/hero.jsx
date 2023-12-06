@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import './hero.css';
 import InputContainer from '../../reservationInputs/inputs/inputContainer';
+import Button from '../../button/button';
+import Link from 'next/link';
 
 export default function Hero() {
   return (
@@ -29,7 +31,9 @@ export default function Hero() {
             <input type='text' id='city' name='city' />
           </div>
           <InputContainer />
-          <button>WYSZUKAJ SAMOCHÓD</button>
+          <div>
+            <Button text='Wyszukaj' />
+          </div>
         </div>
       </div>
       <div className='hero-info'>
@@ -40,7 +44,9 @@ export default function Hero() {
             <span>8:00 a 10:00</span> i zapłać <span>tylko za 2 doby!</span>
           </p>
           <p className='hero-text-info'>Liczba samochodów ograniczona!</p>
-          <button>ZAREZERWUJ</button>
+          <Link href='/reservation' className='ui-btn'>
+            Rezerwacja
+          </Link>
         </div>
         <Image src='/main.png' alt='hero-car' width={750} height={421} priority={true} className='hero-img' />
       </div>
