@@ -6,10 +6,11 @@
   width: 100%;
   border: none;
   border: 1px solid #cccccc;
-  border-bottom: 2px solid #74d7fe;
+  border-bottom: 5px solid #74d7fe;
   padding: 10px;
   margin-top: 5px;
   text-align: center;
+  border-radius: 5px;
 }
 
 ::-webkit-calendar-picker-indicator {

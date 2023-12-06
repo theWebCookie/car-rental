@@ -41,9 +41,9 @@ export default function InputContainer() {
   };
 
   return (
-    <div>
+    <>
       <DateInput inputType='start-date' label='Data odbioru' value={dateRange.startDate} onChange={(value) => handleDateChange('startDate', value)} />
       <DateInput inputType='end-date' label='Data zwrotu' value={dateRange.endDate} onChange={(value) => handleDateChange('endDate', value)} />
-    </div>
+    </>
   );
 }

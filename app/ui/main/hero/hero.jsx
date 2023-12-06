@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import './hero.css';
+import InputContainer from '../../reservationInputs/inputs/inputContainer';
 
 export default function Hero() {
   return (
@@ -23,9 +24,11 @@ export default function Hero() {
           </li>
         </ul>
         <div className='hero-inputs'>
-          <input type='date' name='' id='' />
-          <input type='date' name='' id='' />
-          <input type='date' name='' id='' />
+          <div>
+            <label htmlFor='city'>Miasto</label>
+            <input type='text' id='city' name='city' />
+          </div>
+          <InputContainer />
           <button>WYSZUKAJ SAMOCHÓD</button>
         </div>
       </div>
