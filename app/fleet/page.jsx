@@ -1,42 +1,14 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Car from '../ui/car/car';
 import '../ui/fleet/fleet.css';
-import useFilteredCars from '../lib/useFilteredCars';
 
 export default function Fleet() {
-  const [cars, setCars] = useState([
-    {
-      id: 0,
-      src: '/mockBmw.png',
-      title: 'BMW serii 1 Automat',
-      fuel: 'Benzyna',
-      luggage: '380',
-      doors: '5',
-      seats: '5',
-      transmission: 'Automatyczna',
-      fuelUsage: '6.3',
-      carType: 'automat',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est suscipit odio blanditiis quo commodi illum iure qui, fuga repellendus accusantium. Amet nesciunt in ullam possimus facere accusantium aperiam expedita quasi sint vel libero provident laudantium nisi, blanditiis obcaecati nihil at.',
-    },
-    {
-      id: 1,
-      src: '/mockBmw.png',
-      title: 'BMW serii 1 Automat',
-      fuel: 'Benzyna',
-      luggage: '380',
-      doors: '5',
-      seats: '5',
-      transmission: 'Manualna',
-      fuelUsage: '7',
-      carType: 'osobowe',
-      description:
-        'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis labore quasi nesciunt sequi quisquam magnam facilis accusamus, odio voluptates dolorem!',
-    },
-  ]);
-  const { filteredCars, handleFilter } = useFilteredCars(cars);
+  const [cars, setCars] = useState([]);
+  const searchParams = useSearchParams();
+  const type = searchParams.get('carType');
 
   const filters = [
     { id: 0, src: '/fleet/car.svg', alt: 'Osobowe', carType: 'osobowe' },
@@ -44,6 +16,33 @@ export default function Fleet() {
     { id: 2, src: '/fleet/carTruck.svg', alt: 'Dostawcze', carType: 'truck' },
     { id: 3, src: '/fleet/carVan.svg', alt: 'Van', carType: 'van' },
   ];
+
+  const fetchData = async (type) => {
+    let url = '/api/fleet';
+    if (type != null && type != '') {
+      url = `/api/fleet/${type}`;
+    }
+    console.log(url);
+    const res = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    if (!res.ok) {
+      const errorData = await res.json();
+      alert(errorData.message);
+    } else {
+      const data = await res.json();
+      console.log(data);
+      setCars(data);
+    }
+  };
+
+  //dodac loader
+
+  useEffect(() => {
+    fetchData(type);
+  }, [type]);
 
   return (
     <div className='fleet'>
@@ -59,7 +58,7 @@ export default function Fleet() {
           ))}
         </div>
         <div className='fleet-cars'>
-          {filteredCars.map((car) => (
+          {cars.map((car) => (
             <Car
               id={car.id}
               key={car.id}
