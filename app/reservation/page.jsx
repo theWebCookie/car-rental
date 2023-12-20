@@ -1,11 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Car from '../ui/car/car';
 import FilterContainer from '../ui/reservationInputs/filters/FilterContainer';
 import InputContainer from '../ui/reservationInputs/inputs/inputContainer';
 import '../ui/reservation/reservation.css';
-import { useSearchParams } from 'next/navigation';
 
 export default function Reservation() {
   const [cars, setCars] = useState([
@@ -38,10 +37,6 @@ export default function Reservation() {
         'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis labore quasi nesciunt sequi quisquam magnam facilis accusamus, odio voluptates dolorem!',
     },
   ]);
-
-  const searchParams = useSearchParams();
-  const search = searchParams.get('carType');
-  //add filter logic
 
   return (
     <div className='reservation'>

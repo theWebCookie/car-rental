@@ -13,12 +13,14 @@
 }
 
 .fleet-filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
   margin-bottom: 10px;
-  flex-wrap: wrap;
+}
+
+.fleet-filters div {
+  margin: 0 auto;
 }
 
 .fleet-filters div button {
@@ -49,8 +51,8 @@
   margin: 0px 20px;
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (min-width: 650px) {
   .fleet-filters {
-    justify-content: space-evenly;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
