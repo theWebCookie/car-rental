@@ -1,10 +1,10 @@
-.checkbox-box label {
+.radio-box label {
   color: #212529;
   display: block;
   font-size: 14px;
 }
 
-.checkbox-box label input {
+.radio-box label input {
   margin-right: 10px;
   border: 1px solid #74d7fe;
 }
