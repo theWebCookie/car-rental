@@ -10,7 +10,7 @@ export default function MainSection() {
       <div className='box-wrapper'>
         <div className='box'>
           <div className='icon-box'>
-            <i className='fa-solid fa-car'></i>
+            <i className='fa-solid fa-car' aria-hidden />
           </div>
           <div className='main-text'>
             <span>01</span>
@@ -19,7 +19,7 @@ export default function MainSection() {
         </div>
         <div className='box'>
           <div className='icon-box'>
-            <i className='fa-solid fa-sliders'></i>
+            <i className='fa-solid fa-sliders' aria-hidden />
           </div>
           <div className='main-text'>
             <span>02</span>
@@ -28,7 +28,7 @@ export default function MainSection() {
         </div>
         <div className='box'>
           <div className='icon-box'>
-            <i className='fa-solid fa-plus'></i>
+            <i className='fa-solid fa-plus' aria-hidden />
           </div>
           <div className='main-text'>
             <span>03</span>
@@ -37,7 +37,7 @@ export default function MainSection() {
         </div>
         <div className='box'>
           <div className='icon-box'>
-            <i className='fa-regular fa-user'></i>
+            <i className='fa-regular fa-user' aria-hidden />
           </div>
           <div className='main-text'>
             <span>04</span>
@@ -46,7 +46,7 @@ export default function MainSection() {
         </div>
         <div className='box'>
           <div className='icon-box'>
-            <i className='fa-solid fa-credit-card'></i>
+            <i className='fa-solid fa-credit-card' aria-hidden />
           </div>
           <div className='main-text'>
             <span>05</span>

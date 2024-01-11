@@ -16,13 +16,15 @@ export default function Footer() {
           <li>
             wynajmy krótkoterminowe{' '}
             <p>
-              <i className='fa-solid fa-phone'></i>+48 123 456 789
+              <i className='fa-solid fa-phone' aria-hidden />
+              +48 123 456 789
             </p>
           </li>
           <li>
             wynajmy średnioterminowe{' '}
             <p>
-              <i className='fa-solid fa-phone'></i>+48 987 654 321
+              <i className='fa-solid fa-phone' aria-hidden />
+              +48 987 654 321
             </p>
           </li>
           <li>kontakt@carrent.pl</li>
@@ -55,12 +57,12 @@ export default function Footer() {
         <div className='media'>
           <div>
             <Link href='/'>
-              <i className='fa-brands fa-instagram'></i>
+              <i className='fa-brands fa-instagram' aria-hidden />
             </Link>
           </div>
           <div>
             <Link href='/'>
-              <i className='fa-brands fa-facebook'></i>
+              <i className='fa-brands fa-facebook' aria-hidden />
             </Link>
           </div>
         </div>

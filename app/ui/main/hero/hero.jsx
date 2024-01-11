@@ -11,17 +11,17 @@ export default function Hero() {
         <ul>
           <li>
             <span>
-              <i className='fa-solid fa-check'></i> Bezpłatne anulowanie rezerwacji
+              <i className='fa-solid fa-check' aria-hidden /> Bezpłatne anulowanie rezerwacji
             </span>
           </li>
           <li>
             <span>
-              <i className='fa-solid fa-check'></i> Ponad 35 oddziałow w całej Polsce
+              <i className='fa-solid fa-check' aria-hidden /> Ponad 35 oddziałow w całej Polsce
             </span>
           </li>
           <li>
             <span>
-              <i className='fa-solid fa-check'></i> W ofercie ponad 2700 nowych aut
+              <i className='fa-solid fa-check' aria-hidden /> W ofercie ponad 2700 nowych aut
             </span>
           </li>
         </ul>

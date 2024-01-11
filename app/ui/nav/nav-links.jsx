@@ -37,7 +37,7 @@ export default function NavLinks() {
           Flota
         </Link>
         <Link href='/login' className='nav-link'>
-          <i className='fa-regular fa-user' style={{ color: '#74d7fe' }} aria-hidden='false'></i>
+          <i className='fa-regular fa-user' style={{ color: '#74d7fe' }} aria-hidden />
         </Link>
       </div>
       <div className='menu'>
@@ -48,13 +48,13 @@ export default function NavLinks() {
           Flota
         </Link>
         <Link href='/login' className='nav-link'>
-          <i className='fa-regular fa-user' style={{ color: '#74d7fe' }} aria-hidden='false'></i>
+          <i className='fa-regular fa-user' style={{ color: '#74d7fe' }} aria-hidden />
         </Link>
       </div>
       {isMobileMenuOpen ? (
-        <i className='fa-solid fa-x x' onClick={handleNavBarClick} aria-hidden='false'></i>
+        <i className='fa-solid fa-x x' onClick={handleNavBarClick} aria-hidden />
       ) : (
-        <i className='fa-solid fa-bars bars' onClick={handleNavBarClick} aria-hidden='false'></i>
+        <i className='fa-solid fa-bars bars' onClick={handleNavBarClick} aria-hidden />
       )}
     </>
   );
