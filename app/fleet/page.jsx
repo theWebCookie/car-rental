@@ -62,9 +62,9 @@ export default function Fleet() {
             <Car
               id={car.id}
               key={car.id}
-              src={car.src}
+              src={car.imageUri}
               title={car.title}
-              fuel={car.fuel}
+              fuel={car.fuelType}
               transmission={car.transmission}
               fuelUsage={car.fuelUsage}
               luggage={car.luggage}

@@ -1,5 +1,5 @@
 export async function GET() {
-  const res = await fetch('https://localhost:5001/fleet');
+  const res = await fetch('http://localhost:5046/cars', { next: { revalidate: 36 } });
   if (!res.ok) {
     const errorData = await res.json();
     return new Response(JSON.stringify({ message: errorData.message || `Data fetch failed. Status: ${res.status}` }));
