@@ -1,48 +1,39 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Car from '../ui/car/car';
 import '../ui/fleet/fleet.css';
+import { fetchCars } from '../lib/fetchCars';
 
 export default function Fleet() {
   const [cars, setCars] = useState([]);
-  const searchParams = useSearchParams();
-  const type = searchParams.get('carType');
+  const [filteredCars, setFilteredCars] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const filters = [
-    { id: 0, src: '/fleet/car.svg', alt: 'Osobowe', carType: 'osobowe' },
-    { id: 1, src: '/fleet/carAutomat.svg', alt: 'Automat', carType: 'automat' },
-    { id: 2, src: '/fleet/carTruck.svg', alt: 'Dostawcze', carType: 'truck' },
+    { id: 0, src: '/fleet/hatchback.svg', alt: 'Hatchback', carType: 'hatchback' },
+    { id: 1, src: '/fleet/sedan.svg', alt: 'Sedan', carType: 'sedan' },
+    { id: 2, src: '/fleet/carTruck.svg', alt: 'Dostawcze', carType: 'dostawcze' },
     { id: 3, src: '/fleet/carVan.svg', alt: 'Van', carType: 'van' },
   ];
 
-  const fetchData = async (type) => {
-    let url = '/api/fleet';
-    if (type != null && type != '') {
-      url = `/api/fleet/${type}`;
-    }
-    console.log(url);
-    const res = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!res.ok) {
-      const errorData = await res.json();
-      alert(errorData.message);
-    } else {
-      const data = await res.json();
-      console.log(data);
-      setCars(data);
-    }
+  const fetchCarsFromApi = async () => {
+    setIsLoading(true);
+    const fetchedCars = await fetchCars();
+    setCars(fetchedCars);
+    setFilteredCars(fetchedCars);
+    setIsLoading(false);
   };
 
-  //dodac loader
-
   useEffect(() => {
-    fetchData(type);
-  }, [type]);
+    fetchCarsFromApi();
+  }, []);
+
+  const handleFilter = (carType) => {
+    console.log(carType);
+    const result = cars.filter((car) => car.carType == carType);
+    setFilteredCars(result);
+  };
 
   return (
     <div className='fleet'>
@@ -58,7 +49,8 @@ export default function Fleet() {
           ))}
         </div>
         <div className='fleet-cars'>
-          {cars.map((car) => (
+          {isLoading ? <p>Ładowanie...</p> : filteredCars.length === 0 || cars.length === 0 ? <p>Brak dostępnych samochodów</p> : null}
+          {filteredCars.map((car) => (
             <Car
               id={car.id}
               key={car.id}
@@ -72,6 +64,7 @@ export default function Fleet() {
               seats={car.seats}
               alt={car.title}
               description={car.description}
+              price={car.price}
             />
           ))}
         </div>

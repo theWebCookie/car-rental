@@ -28,6 +28,13 @@
   margin-left: 10px;
 }
 
+.car-info-wrapper div span {
+  color: #10264b;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
 .car-info-wrapper a {
   width: calc(100% - 20px);
   text-align: center;
@@ -68,6 +75,6 @@
 @media only screen and (max-width: 450px) {
   .car .car-image img {
     width: 250px;
-    height: 82px;
+    height: 200px;
   }
 }
