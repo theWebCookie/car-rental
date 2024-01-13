@@ -3,11 +3,11 @@ import FilterRadio from '../../filterRadio/filterRadio';
 import './filterContainer.css';
 
 export default function FilterContainer() {
-  const carTypes = ['Osobowe', 'Van', 'Dostawcze'];
+  const carTypes = ['Hatchback', 'Sedan', 'Van', 'Dostawcze'];
   const transmissions = ['Manualna', 'Automatyczna'];
   const priceOrders = ['Rosnąco', 'Malejąco'];
-  const carTypeValues = ['car', 'van', 'truck'];
-  const transmissionValues = ['manual', 'automat'];
+  const carTypeValues = ['hatchback', 'sedan', 'van', 'dostawcze'];
+  const transmissionValues = ['Manualna', 'Automatyczna'];
   const priceOrderValues = ['asc', 'dsc'];
 
   return (
@@ -15,9 +15,9 @@ export default function FilterContainer() {
       <div className='filters'>
         <div>
           <span className='filter-type'>Typ pojazdu</span>
-          {carTypes.map((carType, index) => (
-            <FilterRadio key={index} name='carType' value={carTypeValues[index]} label={carType} />
-          ))}
+          {carTypes.map((carType, index) => {
+            return <FilterRadio key={index} name='carType' value={carTypeValues[index]} label={carType} />;
+          })}
         </div>
         <div>
           <span className='filter-type'>Skrzynia biegów</span>

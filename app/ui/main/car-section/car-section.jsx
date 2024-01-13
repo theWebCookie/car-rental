@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 export default function CarSection() {
   const cars = [
-    { id: 0, src: '/Car.webp', alt: 'Osobowe', link: '/reservation?carType=car' },
-    { id: 1, src: '/CarAutomat.webp', alt: 'Automat', link: '/reservation?carType=automat' },
-    { id: 2, src: '/CarTruck.webp', alt: 'Dostawcze', link: '/reservation?carType=truck' },
+    { id: 0, src: '/Car.webp', alt: 'Hatchback', link: '/reservation?carType=hatchback' },
+    { id: 1, src: '/CarAutomat.webp', alt: 'Sedan', link: '/reservation?carType=sedan' },
+    { id: 2, src: '/CarTruck.webp', alt: 'Dostawcze', link: '/reservation?carType=dostawcze' },
     { id: 3, src: '/CarVan.webp', alt: 'Van', link: '/reservation?carType=van' },
   ];
 
