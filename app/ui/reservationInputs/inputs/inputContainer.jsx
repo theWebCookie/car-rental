@@ -1,5 +1,6 @@
 'use client';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import DateInput from '../../dateInput/dateInput';
 
 export default function InputContainer() {
@@ -7,6 +8,20 @@ export default function InputContainer() {
     startDate: '',
     endDate: '',
   });
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const handleUrlChange = (inputType, value) => {
+    const params = new URLSearchParams(searchParams);
+    if (value) {
+      params.set(inputType, value);
+    } else {
+      params.delete(inputType);
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
 
   const handleDateChange = (inputType, value) => {
     try {
@@ -25,6 +40,7 @@ export default function InputContainer() {
           ...prevDateRange,
           startDate: value,
         }));
+        handleUrlChange(inputType, value);
       } else {
         if (dateRange.startDate && selectedDate < new Date(dateRange.startDate)) {
           throw new Error('Data końcowa nie może być przed datą początkową');
@@ -34,11 +50,22 @@ export default function InputContainer() {
           ...prevDateRange,
           endDate: value,
         }));
+        handleUrlChange(inputType, value);
       }
     } catch (error) {
       alert(error.message);
     }
   };
+
+  useEffect(() => {
+    const startDateFromUrl = searchParams.get('startDate') || '';
+    const endDateFromUrl = searchParams.get('endDate') || '';
+
+    setDateRange({
+      startDate: startDateFromUrl,
+      endDate: endDateFromUrl,
+    });
+  }, [searchParams]);
 
   return (
     <>

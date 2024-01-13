@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Car from '../ui/car/car';
 import FilterContainer from '../ui/reservationInputs/filters/FilterContainer';
 import InputContainer from '../ui/reservationInputs/inputs/inputContainer';
@@ -12,15 +12,20 @@ export default function Reservation() {
   const [filteredCars, setFilteredCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const carType = searchParams.get('carType') || '';
   const transmission = searchParams.get('transmission') || '';
   const priceOrder = searchParams.get('priceOrder') || 'desc';
+  const startDate = searchParams.get('startDate');
+  const endDate = searchParams.get('endDate');
 
   const fetchAndFilterCars = async () => {
     setIsLoading(true);
     const fetchedCars = await fetchCars();
     setCars(fetchedCars);
+    const selectedStart = new Date(startDate);
+    const selectedEnd = new Date(endDate);
 
     let filteredResult = [...fetchedCars];
 
@@ -32,6 +37,14 @@ export default function Reservation() {
       filteredResult = filteredResult.filter((car) => car.transmission === transmission);
     }
 
+    if (startDate && endDate) {
+      filteredResult = filteredResult.filter((car) => {
+        const availabilityStart = car.availabilityStart === '0001-01-01T00:00:00' ? new Date() : new Date(car.availabilityStart);
+        const availabilityEnd = car.availabilityEnd === '0001-01-01T00:00:00' ? new Date(2100, 0, 1) : new Date(car.availabilityEnd);
+        return selectedStart >= availabilityStart && selectedEnd <= availabilityEnd && selectedStart < selectedEnd;
+      });
+    }
+
     filteredResult.sort((a, b) => (priceOrder === 'asc' ? a.price - b.price : b.price - a.price));
 
     setFilteredCars(filteredResult);
@@ -39,7 +52,9 @@ export default function Reservation() {
   };
 
   const handleRouteChange = () => {
+    setIsLoading(true);
     fetchAndFilterCars();
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -50,6 +65,10 @@ export default function Reservation() {
     handleRouteChange();
   }, [searchParams]);
 
+  const resetFilters = () => {
+    router.push('/reservation');
+  };
+
   return (
     <div className='reservation'>
       <div className='reservation-wrapper'>
@@ -57,7 +76,7 @@ export default function Reservation() {
           <div className='reservation-inputs'>
             <span>Data rezerwacji</span>
             <InputContainer />
-            <button>Wyszukaj samochod</button>
+            <button onClick={resetFilters}>Reset filtrów</button>
           </div>
           <div className='reservation-filters'>
             <span className='filter-heading'>Filtry</span>
