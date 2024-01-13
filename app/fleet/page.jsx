@@ -65,6 +65,7 @@ export default function Fleet() {
               alt={car.title}
               description={car.description}
               price={car.price}
+              city={car.city}
             />
           ))}
         </div>

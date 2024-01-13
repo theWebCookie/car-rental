@@ -100,6 +100,7 @@ export default function Reservation() {
               alt={car.title}
               description={car.description}
               price={car.price}
+              city={car.city}
             />
           ))}
         </div>

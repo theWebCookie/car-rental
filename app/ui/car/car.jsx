@@ -3,7 +3,7 @@ import Image from 'next/image';
 import './car.css';
 import Link from 'next/link';
 
-export default function Car({ src, alt, title, fuel, transmission, fuelUsage, luggage, doors, seats, id, description, price, extended }) {
+export default function Car({ src, alt, title, fuel, transmission, fuelUsage, luggage, doors, seats, id, description, price, city, extended }) {
   return (
     <div className='car'>
       <div className='car-image'>
@@ -34,6 +34,7 @@ export default function Car({ src, alt, title, fuel, transmission, fuelUsage, lu
               <Image src='/car/seats.svg' width={16} height={16} alt='seats' /> {seats}
             </div>
             <div>Cena: {price}zł/dzień</div>
+            <div>Miasto: {city}</div>
           </div>
           <Link href={`/fleet/${id}`} className={extended ? 'hidden' : ''}>
             WIĘCEJ
