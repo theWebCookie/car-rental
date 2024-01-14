@@ -86,7 +86,10 @@ const Login = () => {
           </div>
           <div className={isHidden ? 'register-form hidden' : 'register-form'}>
             <form name='register' onSubmit={(event) => handleFormSubmit(event, '/api/auth/register')}>
-              <Input type='text' placeholder='Imię i naziwsko*' name='name' onChange={handleInputChange} />
+              <div className='two-register-inputs'>
+                <Input type='text' placeholder='Imię*' name='firstName' onChange={handleInputChange} />
+                <Input type='text' placeholder='Naziwsko*' name='seccondName' onChange={handleInputChange} />
+              </div>
               <Input type='email' placeholder='Email*' name='email' onChange={handleInputChange} />
               <Input type='password' placeholder='Hasło*' name='password' onChange={handleInputChange} />
               <Input type='password' placeholder='Powtórz hasło*' />

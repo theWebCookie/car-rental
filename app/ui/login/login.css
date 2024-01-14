@@ -120,6 +120,15 @@
   margin-top: 5px;
 }
 
+.two-register-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.two-register-inputs input {
+  width: 49%;
+}
+
 @media only screen and (max-width: 768px) {
   .login-form,
   .register-wrapper {
