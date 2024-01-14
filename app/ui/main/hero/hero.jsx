@@ -1,10 +1,31 @@
+'use client';
 import Image from 'next/image';
 import './hero.css';
 import InputContainer from '../../reservationInputs/inputs/inputContainer';
 import Button from '../../button/button';
 import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Hero() {
+  const [searchParams, setSearchParams] = useState({
+    city: '',
+    startDate: '',
+    endDate: '',
+  });
+  const router = useRouter();
+
+  const handleDateChange = (inputType, value) => {
+    setSearchParams((prevSearchParams) => ({
+      ...prevSearchParams,
+      [inputType]: value,
+    }));
+  };
+
+  const handleSearch = () => {
+    router.push(`/reservation?city=${searchParams.city}&startDate=${searchParams.startDate}&endDate=${searchParams.endDate}`);
+  };
+
   return (
     <div className='hero'>
       <div className='hero-search'>
@@ -28,11 +49,17 @@ export default function Hero() {
         <div className='hero-inputs'>
           <div>
             <label htmlFor='city'>Miasto</label>
-            <input type='text' id='city' name='city' />
+            <input
+              type='text'
+              id='city'
+              name='city'
+              value={searchParams.city}
+              onChange={(e) => setSearchParams((prevSearchParams) => ({ ...prevSearchParams, city: e.target.value }))}
+            />
           </div>
-          <InputContainer />
+          <InputContainer onDateChange={handleDateChange} />
           <div>
-            <Button text='Wyszukaj' />
+            <Button text='Wyszukaj' onClick={handleSearch} />
           </div>
         </div>
       </div>
