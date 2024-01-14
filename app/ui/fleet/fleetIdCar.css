@@ -1,0 +1,14 @@
+.car-page {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.car-info .car-info-wrapper .hidden {
+  display: block;
+}
+
+@media only screen and (max-width: 660px) {
+  .car-page {
+    width: 90%;
+  }
+}
