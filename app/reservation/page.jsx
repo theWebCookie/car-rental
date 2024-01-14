@@ -19,6 +19,11 @@ export default function Reservation() {
   const priceOrder = searchParams.get('priceOrder') || 'desc';
   const startDate = searchParams.get('startDate');
   const endDate = searchParams.get('endDate');
+  const city = searchParams.get('city');
+
+  const handleDateChange = (inputType, value) => {
+    console.log(`${inputType} changed to ${value}`);
+  };
 
   const fetchAndFilterCars = async () => {
     setIsLoading(true);
@@ -43,6 +48,10 @@ export default function Reservation() {
         const availabilityEnd = car.availabilityEnd === '0001-01-01T00:00:00' ? new Date(2100, 0, 1) : new Date(car.availabilityEnd);
         return selectedStart >= availabilityStart && selectedEnd <= availabilityEnd && selectedStart < selectedEnd;
       });
+    }
+
+    if (city) {
+      filteredResult = filteredResult.filter((car) => car.city == city);
     }
 
     filteredResult.sort((a, b) => (priceOrder === 'asc' ? a.price - b.price : b.price - a.price));
@@ -75,7 +84,7 @@ export default function Reservation() {
         <div className='reservation-info'>
           <div className='reservation-inputs'>
             <span>Data rezerwacji</span>
-            <InputContainer />
+            <InputContainer onDateChange={handleDateChange} />
             <button onClick={resetFilters}>Reset filtrów</button>
           </div>
           <div className='reservation-filters'>

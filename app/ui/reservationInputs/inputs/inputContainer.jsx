@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import DateInput from '../../dateInput/dateInput';
 
-export default function InputContainer() {
+export default function InputContainer({ onDateChange }) {
   const [dateRange, setDateRange] = useState({
     startDate: '',
     endDate: '',
@@ -40,6 +40,7 @@ export default function InputContainer() {
           ...prevDateRange,
           startDate: value,
         }));
+        onDateChange('startDate', value);
         handleUrlChange(inputType, value);
       } else {
         if (dateRange.startDate && selectedDate < new Date(dateRange.startDate)) {
@@ -50,6 +51,7 @@ export default function InputContainer() {
           ...prevDateRange,
           endDate: value,
         }));
+        onDateChange('endDate', value);
         handleUrlChange(inputType, value);
       }
     } catch (error) {
