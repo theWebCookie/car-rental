@@ -51,22 +51,7 @@ export default function Fleet() {
         <div className='fleet-cars'>
           {isLoading ? <p>Ładowanie...</p> : filteredCars.length === 0 || cars.length === 0 ? <p>Brak dostępnych samochodów</p> : null}
           {filteredCars.map((car) => (
-            <Car
-              id={car.id}
-              key={car.id}
-              src={car.imageUri}
-              title={car.title}
-              fuel={car.fuelType}
-              transmission={car.transmission}
-              fuelUsage={car.fuelUsage}
-              luggage={car.luggage}
-              doors={car.doors}
-              seats={car.seats}
-              alt={car.title}
-              description={car.description}
-              price={car.price}
-              city={car.city}
-            />
+            <Car key={car.id} car={car} />
           ))}
         </div>
       </div>

@@ -2,12 +2,18 @@
 import Image from 'next/image';
 import './car.css';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-export default function Car({ src, alt, title, fuel, transmission, fuelUsage, luggage, doors, seats, id, description, price, city, extended }) {
+export default function Car({ car, cardType, extended }) {
+  const { imageUri, title, fuel, transmission, fuelUsage, luggage, doors, seats, id, description, price, city } = car;
+  const [card, setCard] = useState(null);
+  useEffect(() => {
+    if (cardType) setCard(cardType);
+  }, [cardType]);
   return (
     <div className='car'>
       <div className='car-image'>
-        <Image src={src} width={300} height={200} style={{ objectFit: 'contain' }} alt={alt} />
+        <Image src={imageUri} width={300} height={200} style={{ objectFit: 'contain' }} alt={title} />
       </div>
       <div className='car-info'>
         <div className='car-info-wrapper'>
@@ -36,8 +42,8 @@ export default function Car({ src, alt, title, fuel, transmission, fuelUsage, lu
             <div>Cena: {price}zł/dzień</div>
             <div>Miasto: {city}</div>
           </div>
-          <Link href={`/fleet/${id}`} className={extended ? 'hidden' : ''}>
-            WIĘCEJ
+          <Link href={card == 'reservation' ? `/reservation/${id}` : `/fleet/${id}`} className={extended ? 'hidden' : ''}>
+            {card == 'reservation' ? 'REZERWUJ' : 'WIĘCEJ'}
           </Link>
         </div>
       </div>
