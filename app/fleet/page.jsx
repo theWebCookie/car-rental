@@ -17,15 +17,14 @@ export default function Fleet() {
     { id: 3, src: '/fleet/carVan.svg', alt: 'Van', carType: 'van' },
   ];
 
-  const fetchCarsFromApi = async () => {
-    setIsLoading(true);
-    const fetchedCars = await fetchCars();
-    setCars(fetchedCars);
-    setFilteredCars(fetchedCars);
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const fetchCarsFromApi = async () => {
+      setIsLoading(true);
+      const fetchedCars = await fetchCars();
+      setCars(fetchedCars);
+      setFilteredCars(fetchedCars);
+      setIsLoading(false);
+    };
     fetchCarsFromApi();
   }, []);
 
