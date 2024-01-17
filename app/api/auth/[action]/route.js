@@ -18,7 +18,7 @@ export async function POST(request, { params }) {
       });
     }
 
-    const res = await fetch('https://localhost:5010/users/login', {
+    const res = await fetch('http://localhost:5046/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,15 +33,16 @@ export async function POST(request, { params }) {
       });
     }
 
-    cookies().set('auth', 'true');
-
-    return new Response(JSON.stringify({ message: 'Success' }));
+    const data = await res.json();
+    cookies().set('userId', data.userId);
+    cookies().set('token', data.token);
+    return new Response(JSON.stringify({ message: 'Success!' }));
   } else if (type === 'register') {
     const body = await request.json();
 
-    const { name, email, password } = body;
+    const { firstName, seccondName, email, password } = body;
 
-    if (!name) {
+    if (!firstName || !seccondName) {
       return new Response(JSON.stringify({ message: 'Invalid name!' }), {
         status: 422,
       });
@@ -59,7 +60,7 @@ export async function POST(request, { params }) {
       });
     }
 
-    const res = await fetch('https://localhost:5010/users', {
+    const res = await fetch('http://localhost:5046/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -75,6 +76,8 @@ export async function POST(request, { params }) {
     }
 
     const data = await res.json();
-    return Response.json(data);
+    cookies().set('userId', data.userId);
+    cookies().set('token', data.token);
+    return new Response(JSON.stringify({ message: 'Success!' }));
   }
 }

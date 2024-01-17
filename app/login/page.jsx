@@ -1,8 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import '../ui/login/login.css';
 import Button from '../ui/button/button';
 import Input from '../ui/input/input';
+import { useRouter } from 'next/navigation';
 
 const initialLoginFormData = {
   email: '',
@@ -10,7 +11,8 @@ const initialLoginFormData = {
 };
 
 const initialRegisterFormData = {
-  name: '',
+  firstName: '',
+  seccondName: '',
   email: '',
   password: '',
 };
@@ -18,6 +20,7 @@ const initialRegisterFormData = {
 const Login = () => {
   const [isHidden, setIsHidden] = useState(true);
   const [formData, setFormData] = useState(initialLoginFormData);
+  const router = useRouter();
 
   const sendData = async (url) => {
     const res = await fetch(url, {
@@ -32,7 +35,7 @@ const Login = () => {
       const errorData = await res.json();
       alert(errorData.message);
     } else {
-      const data = await res.json();
+      router.push('/account');
     }
   };
 
