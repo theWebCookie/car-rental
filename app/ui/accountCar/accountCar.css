@@ -1,0 +1,68 @@
+.resrvation-car {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid #d7d7d7;
+  border-radius: 5px;
+  padding: 10px 0 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.car-info {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+
+.car-title {
+  color: #10264b;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 29px;
+}
+
+.account-car-info a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.account-car-info {
+  width: 50%;
+  text-align: center;
+  background-color: #74d7fe;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+  border: 2px solid #74d7fe;
+}
+
+.account-car-info:hover {
+  background-color: #fff;
+  color: #74d7fe;
+}
+
+.account-car-info:hover a {
+  color: #74d7fe;
+}
+
+.reservation-info {
+  margin: 10px 0;
+}
+
+.reservation-info ul li {
+  margin: 5px 0;
+}
+
+@media only screen and (max-width: 450px) {
+  .car .car-image img {
+    width: 250px;
+    height: 200px;
+  }
+}
