@@ -23,7 +23,8 @@ export default function NavLinks() {
   }, [pathname]);
 
   const handleSignOut = async () => {
-    removeCookies();
+    await removeCookies();
+    window.location.href = '/login';
   };
   return (
     <>

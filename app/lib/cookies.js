@@ -8,7 +8,10 @@ export async function getCookies() {
 }
 
 export async function removeCookies() {
-  const cookieStore = cookies();
-  cookieStore.delete('userId');
-  cookieStore.delete('token');
+  return new Promise((resolve) => {
+    const cookieStore = cookies();
+    cookieStore.delete('userId');
+    cookieStore.delete('token');
+    resolve();
+  });
 }
