@@ -2,7 +2,7 @@
   padding: 10px;
 }
 
-.input-wrapper input[type='date'] {
+.input-wrapper input[type='datetime-local'] {
   width: 100%;
   border: none;
   border: 1px solid #cccccc;

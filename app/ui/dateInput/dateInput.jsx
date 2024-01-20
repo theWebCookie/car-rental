@@ -10,7 +10,7 @@ export default function DateInput({ inputType, label, value, onChange }) {
   return (
     <div className='input-wrapper'>
       <label htmlFor={inputType}>{label}</label>
-      <input type='date' id={inputType} name={inputType} value={value} onChange={(event) => handleInputChange(event)} />
+      <input type='datetime-local' id={inputType} name={inputType} value={value} onChange={(event) => handleInputChange(event)} />
     </div>
   );
 }
