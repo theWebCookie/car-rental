@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import '../ui/account/account.css';
 import AccountCar from '../ui/accountCar/accountCar';
 import { fetchReservationByUserId } from '../lib/fetchReservations';
+import Link from 'next/link';
 
 export default function Account() {
   const [reservedCars, setReservedCars] = useState([]);
@@ -22,8 +23,6 @@ export default function Account() {
     fetchReservationsFromApi();
   }, []);
 
-  console.log(resInfo);
-
   return (
     <div className='account'>
       <div className='account-wrapper'>
@@ -40,7 +39,16 @@ export default function Account() {
           <div>
             <h2>Moje rezerwacje</h2>
             <div className='account-reservaitons'>
-              {isLoading ? <p>Ładowanie...</p> : reservedCars.length === 0 ? <p>Brak dostępnych samochodów</p> : null}
+              {isLoading ? (
+                <p>Ładowanie...</p>
+              ) : reservedCars.length === 0 ? (
+                <div className='account-link'>
+                  <p>Brak rezerwacji.</p>
+                  <div>
+                    <Link href='/reservation'>Dodaj rezerwację</Link>
+                  </div>
+                </div>
+              ) : null}
               {reservedCars.map((car, index) => {
                 return <AccountCar key={car.id} car={car} info={resInfo[index]} />;
               })}
