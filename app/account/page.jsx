@@ -50,7 +50,7 @@ export default function Account() {
                 </div>
               ) : null}
               {reservedCars.map((car, index) => {
-                return <AccountCar key={car.id} car={car} info={resInfo[index]} />;
+                return <AccountCar key={`${car.id}_${index}`} car={car} info={resInfo[index]} />;
               })}
             </div>
           </div>

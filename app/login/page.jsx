@@ -80,10 +80,10 @@ const Login = () => {
             <span>Z kontem klienta:</span>
             <ul>
               <li>
-                <i className='fa-solid fa-check'></i> rezerwujesz samochody jeszcze szybciej
+                <i className='fa-solid fa-check' aria-hidden></i> rezerwujesz samochody jeszcze szybciej
               </li>
               <li>
-                <i className='fa-solid fa-check'></i> łatwo zarządzasz swoimi danymi
+                <i className='fa-solid fa-check' aria-hidden></i> łatwo zarządzasz swoimi danymi
               </li>
             </ul>
           </div>
