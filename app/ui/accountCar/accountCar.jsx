@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function AccountCar({ car, info }) {
   const { imageUri, title, id } = car;
-  const { startDate, endDate } = info;
+  const { startDate, endDate, price } = info;
 
   const formatDateTime = (dateTimeString) => {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -16,8 +16,13 @@ export default function AccountCar({ car, info }) {
     const currentDate = new Date();
     const startDateTime = new Date(startDate);
     const endDateTime = new Date(endDate);
-
-    return currentDate >= startDateTime && currentDate <= endDateTime ? 'W trakcie' : 'Zakończona';
+    if (currentDate >= startDateTime && currentDate <= endDateTime) {
+      return 'W trakcie';
+    } else if (startDateTime >= currentDate && currentDate <= endDateTime) {
+      return 'Zaplanowana';
+    } else {
+      return 'Zakończona';
+    }
   };
 
   return (
@@ -35,11 +40,17 @@ export default function AccountCar({ car, info }) {
           <ul>
             <li>Data startu: {formatDateTime(startDate)}</li>
             <li>Data końca: {formatDateTime(endDate)}</li>
-            {/* dodac pole do klasy rezerwacji */}
-            <li>Opcje:</li>
+            <li>Cena: {price}</li>
             <li>
               Status:{' '}
-              <span style={{ color: checkStatus(startDate, endDate) === 'W trakcie' ? 'green' : 'red' }}>{checkStatus(startDate, endDate)}</span>
+              <span
+                style={{
+                  color:
+                    checkStatus(startDate, endDate) === 'W trakcie' ? 'green' : checkStatus(startDate, endDate) === 'Zaplanowana' ? 'grey' : 'red',
+                }}
+              >
+                {checkStatus(startDate, endDate)}
+              </span>
             </li>
           </ul>
         </div>
