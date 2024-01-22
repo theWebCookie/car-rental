@@ -7,6 +7,10 @@ export async function getCookies() {
   return cookieStore.getAll();
 }
 
+export async function getCookie(name) {
+  return cookies.get(name);
+}
+
 export async function removeCookies() {
   return new Promise((resolve) => {
     const cookieStore = cookies();
