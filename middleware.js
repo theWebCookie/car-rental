@@ -12,6 +12,10 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
+  if (!isAuthenticated() && request.nextUrl.pathname.startsWith('/reservation/')) {
+    return NextResponse.redirect(new URL('/reservation', request.url));
+  }
+
   if (isAuthenticated() && request.nextUrl.pathname.startsWith('/login')) {
     return NextResponse.redirect(new URL('/account', request.url));
   }
