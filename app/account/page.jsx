@@ -23,6 +23,8 @@ export default function Account() {
     fetchReservationsFromApi();
   }, []);
 
+  const reversedCars = [...reservedCars].reverse();
+
   return (
     <div className='account'>
       <div className='account-wrapper'>
@@ -49,7 +51,7 @@ export default function Account() {
                   </div>
                 </div>
               ) : null}
-              {reservedCars.map((car, index) => {
+              {reversedCars.map((car, index) => {
                 return <AccountCar key={`${car.id}_${index}`} car={car} info={resInfo[index]} />;
               })}
             </div>
