@@ -4,36 +4,56 @@ import { fetchCarById } from '@/app/lib/fetchCars';
 import Car from '@/app/ui/car/car';
 import '@/app/ui/reservation/reservationId.css';
 import { getCookies } from '@/app/lib/cookies';
+import Button from '@/app/ui/button/button';
+import Image from 'next/image';
+import loadingGif from '../../../public/loading-gif.gif';
+import { useRouter } from 'next/navigation';
 
 export default function ReservationPage({ params }) {
   const [car, setCar] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [userId, setUserId] = useState();
+  const [optionIds, setOptionIds] = useState('');
+  const [isReqLoading, setIsReqLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
+    setIsLoading(true);
+
     const getAllCookies = async () => {
       const cookie = (await getCookies())?.find((cookie) => cookie.name == 'userId');
       setUserId(cookie.value);
     };
-    getAllCookies();
-  }, []);
 
-  console.log(userId);
-
-  const today = new Date();
-  const minEndDate = new Date(today);
-  minEndDate.setDate(minEndDate.getDate() + 1);
-
-  const [startDate, setStartDate] = useState(today);
-  const [endDate, setEndDate] = useState(minEndDate);
-
-  useEffect(() => {
     const fetchCar = async () => {
       const fetchedCar = await fetchCarById(params.id);
       setCar(fetchedCar);
+
+      const minStartDate = new Date(car.availabilityStart);
+      minStartDate.setDate(minStartDate.getDate() + 1);
+
+      const minEndDate = new Date(minStartDate);
+      minEndDate.setDate(minEndDate.getDate() + 1);
+
+      setStartDate(minStartDate);
+      setEndDate(minEndDate);
+
+      setIsLoading(false);
     };
+
     fetchCar();
-  }, [params.id]);
+    getAllCookies();
+  }, [userId, params.id]);
+
+  const minStartDate = new Date(car.availabilityStart);
+  minStartDate.setDate(minStartDate.getDate() + 1);
+
+  const minEndDate = new Date(minStartDate);
+  minEndDate.setDate(minEndDate.getDate() + 1);
+
+  const [startDate, setStartDate] = useState(minStartDate);
+  const [endDate, setEndDate] = useState(minEndDate);
 
   const optionsTable = [
     { id: 1, name: 'Fotelik dziecięcy - 9-36kg', price: 20 },
@@ -57,8 +77,16 @@ export default function ReservationPage({ params }) {
     return car.price * daysDifference;
   };
 
-  const handleOptionChange = (optionName) => {
+  const handleOptionChange = (optionName, optionId) => {
     const updatedOptions = { ...selectedOptions, [optionName]: !selectedOptions[optionName] };
+
+    if (optionIds.includes(optionId.toString())) {
+      let newOptionIds = optionIds.replace(optionId.toString(), '');
+      setOptionIds(newOptionIds);
+    } else {
+      let newOptionIds = optionIds + optionId.toString();
+      setOptionIds(newOptionIds);
+    }
     setSelectedOptions(updatedOptions);
   };
 
@@ -75,7 +103,9 @@ export default function ReservationPage({ params }) {
 
   const handleEndDateChange = (dateValue) => {
     const endDate = new Date(dateValue);
-    if (new Date(endDate) <= new Date(car.availabilityEnd) || new Date(car.availabilityEnd).getFullYear() == 0o1) {
+    const startDateObj = new Date(startDate);
+
+    if (startDateObj <= endDate && endDate < new Date(car.availabilityEnd) && endDate > new Date(startDate)) {
       setEndDate(endDate);
     } else {
       alert('Błędna data');
@@ -90,13 +120,15 @@ export default function ReservationPage({ params }) {
     const hours = `0${formatedDate.getHours()}`.slice(-2);
     const minutes = `0${formatedDate.getMinutes()}`.slice(-2);
     if (year == 0o1) {
-      return 'Brak';
+      return 'Dowolnie';
     }
-    if (display) return `${day}/${month}/${year} - ${hours}:${minutes}`;
+    if (display) return `${day}/${month}/${year}, ${hours}:${minutes}`;
     return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
   const handleReservation = async () => {
+    window.scrollTo(0, 0);
+    setIsReqLoading(true);
     const price = calculateTotalCarCost() + calculateOptionsCost();
     const reservationBody = {
       startDate: formatToInputString(startDate),
@@ -104,6 +136,7 @@ export default function ReservationPage({ params }) {
       userId: parseInt(userId),
       carId: car.id,
       price,
+      options: optionIds,
     };
 
     const postRes = await fetch('/api/reservation', {
@@ -131,70 +164,95 @@ export default function ReservationPage({ params }) {
       const errorData = await putRes.json();
       console.log(errorData.message);
     }
+    setIsReqLoading(false);
+    router.push('/account');
   };
 
   return (
-    <div>
-      <div>
-        <Car car={car} />
-      </div>
-      <div>
-        <h1>
-          Dostępność auta: {formatToInputString(car.availabilityStart, true)} - {formatToInputString(car.availabilityEnd, true)}
-        </h1>
-      </div>
-      <div>
-        <h2>Opcje:</h2>
-        {optionsTable.map((option) => (
-          <div key={option.name}>
-            <label>
-              <input type='checkbox' checked={selectedOptions[option.name] || false} onChange={() => handleOptionChange(option.name)} />
-              {option.name} (+{option.price}zł)
-            </label>
+    <>
+      {isLoading ? (
+        <div className='states'>
+          <Image src={loadingGif} width={200} height={200} alt='loading' className='loading' />
+        </div>
+      ) : (
+        <div className='car-reservation-wrapper'>
+          <div className='reservation-car-wrapper'>
+            <Car car={car} />
           </div>
-        ))}
-      </div>
-
-      <div>
-        <h2>Koszt rezerwacji</h2>
-        <div>
-          <label>Start date:</label>
-          <input
-            type='datetime-local'
-            value={formatToInputString(startDate)}
-            min={formatToInputString(today)}
-            onChange={(e) => handleStartDateChange(new Date(e.target.value))}
-          />
+          <div className='car-reservation-info'>
+            <h1>
+              Najbliższy okres dostępności auta: {formatToInputString(car.availabilityStart, true)} - {formatToInputString(car.availabilityEnd, true)}
+            </h1>
+          </div>
+          {car && (
+            <div className='flex'>
+              <div>
+                <h2>Opcje:</h2>
+                {optionsTable.map((option) => (
+                  <div key={option.id} className='car-reservation-checkbox'>
+                    <label>
+                      <input
+                        type='checkbox'
+                        checked={selectedOptions[option.name] || false}
+                        onChange={() => handleOptionChange(option.name, option.id)}
+                      />
+                      {option.name} (+{option.price}zł)
+                    </label>
+                  </div>
+                ))}
+              </div>
+              <div className='flex2'>
+                <label>Data odbioru:</label>
+                <div>
+                  <input
+                    type='datetime-local'
+                    value={formatToInputString(startDate)}
+                    min={formatToInputString(minStartDate)}
+                    onChange={(e) => handleStartDateChange(new Date(e.target.value))}
+                  />
+                </div>
+                <label>Data zwrotu:</label>
+                <div>
+                  <input
+                    type='datetime-local'
+                    value={formatToInputString(endDate)}
+                    min={formatToInputString(minEndDate)}
+                    onChange={(e) => handleEndDateChange(new Date(e.target.value))}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+          {car && (
+            <>
+              <table>
+                <thead>
+                  <tr>
+                    <td>Samochód</td>
+                    <td>Opcje</td>
+                    <td>Całkowity koszt</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      {calculateTotalCarCost()}zł za {Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24))} dni
+                    </td>
+                    <td>{calculateOptionsCost()}zł</td>
+                    <td>{calculateTotalCarCost() + calculateOptionsCost()}zł</td>
+                  </tr>
+                </tbody>
+              </table>
+              <Button text='REZERWUJ' onClick={handleReservation} />
+            </>
+          )}
+          {isReqLoading && (
+            <div className='states'>
+              <Image src={loadingGif} width={200} height={200} alt='loading' className='loading' />
+            </div>
+          )}
         </div>
-        <div>
-          <label>End date:</label>
-          <input
-            type='datetime-local'
-            value={formatToInputString(endDate)}
-            min={formatToInputString(minEndDate)}
-            onChange={(e) => handleEndDateChange(new Date(e.target.value))}
-          />
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <td>Samochód</td>
-              <td>Opcje</td>
-              <td>Całkowity koszt</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                {calculateTotalCarCost()}zł za {Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24))} dni
-              </td>
-              <td>{calculateOptionsCost()}zł</td>
-              <td>{calculateTotalCarCost() + calculateOptionsCost()}zł</td>
-            </tr>
-          </tbody>
-        </table>
-        <button onClick={handleReservation}>REZERWUJ</button>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
