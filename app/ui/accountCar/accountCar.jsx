@@ -5,7 +5,16 @@ import Link from 'next/link';
 
 export default function AccountCar({ car, info }) {
   const { imageUri, title, id } = car;
-  const { startDate, endDate, price } = info;
+  const { startDate, endDate, price, options } = info;
+
+  const optionsTable = [
+    { id: 1, name: 'Fotelik dziecięcy - 9-36kg', price: 20 },
+    { id: 2, name: 'Końcowe mycie pojazdu', price: 30 },
+    { id: 3, name: 'Pomoc drogowa', price: 75 },
+    { id: 4, name: 'Dodatkowe ubezpieczenie', price: 100 },
+  ];
+
+  const reservationOptions = optionsTable.filter((option) => options.split('').sort().includes(option.id.toString()));
 
   const formatDateTime = (dateTimeString) => {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
@@ -37,10 +46,20 @@ export default function AccountCar({ car, info }) {
           </div>
         </div>
         <div className='reservation-info'>
-          <ul>
+          <ol>
             <li>Data startu: {formatDateTime(startDate)}</li>
             <li>Data końca: {formatDateTime(endDate)}</li>
-            <li>Cena: {price}</li>
+            <li>Cena: {price}zł</li>
+            <li>
+              Opcje:
+              <ul className='options-list'>
+                {reservationOptions.length > 0 ? (
+                  reservationOptions.map((option) => <li key={option.id}>{option.name}</li>)
+                ) : (
+                  <li>Nie wybrano opcji</li>
+                )}
+              </ul>
+            </li>
             <li>
               Status:{' '}
               <span
@@ -52,11 +71,11 @@ export default function AccountCar({ car, info }) {
                 {checkStatus(startDate, endDate)}
               </span>
             </li>
-          </ul>
+          </ol>
         </div>
-      </div>
-      <div className='account-car-info'>
-        <Link href={`/fleet/${id}`}>WIĘCEJ</Link>
+        <div className='account-car-info'>
+          <Link href={`/fleet/${id}`}>WIĘCEJ</Link>
+        </div>
       </div>
     </div>
   );
