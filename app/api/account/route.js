@@ -20,7 +20,7 @@ const fetchUserData = async (userId, token) => {
 const fetchCarsByIds = async (carIds) => {
   const carsPromises = carIds.map(async (id) => {
     try {
-      const response = await fetch(`http://localhost:5046/cars/${id}`);
+      const response = await fetch(`http://localhost:5046/cars/${id}`, { cache: 'no-store' });
       if (!response.ok) {
         const errorData = await res.json();
         return new Response(JSON.stringify({ message: errorData.message || `Data fetch failed. Status: ${res.status}` }));
@@ -47,7 +47,7 @@ export async function GET() {
 
   const res = await fetch(`http://localhost:5046/reservations/user/${userId}`, {
     headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: 360 },
+    cache: 'no-store',
   });
 
   if (!res.ok) {
